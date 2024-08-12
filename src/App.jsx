@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import TodoList from "./TodoList";
 import AddTodoPopup from "./AddTodoPopup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +9,8 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  // Fetch todos from API
+  //Fetch todos from API
+
   useEffect(() => {
     const fetchTodos = async () => {
       try {
