@@ -1,5 +1,7 @@
+
 import { useState } from "react";
 import AddTodoPopup from "./AddTodoPopup";
+
 function TodoList({ todos }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -8,6 +10,7 @@ function TodoList({ todos }) {
     setTasks([...tasks, newTask]);
   };
   return (
+
     <div>
       <button onClick={() => setIsModalOpen(true)} className="btn btn-primary">
         Add New Task
@@ -27,6 +30,8 @@ function TodoList({ todos }) {
         ))}
       </ul>
     </div>
+
+   
   );
 }
 
