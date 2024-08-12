@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { FaUser, FaUsers } from "react-icons/fa"; // Importing the icons
 
 const AddTodoPopup = ({ isOpen, onClose, onCreate }) => {
   const [taskTitle, setTaskTitle] = useState("");
@@ -10,20 +11,20 @@ const AddTodoPopup = ({ isOpen, onClose, onCreate }) => {
   const [category, setCategory] = useState("Personal");
 
   const handleCreate = async () => {
-    //Validation
+    // Validation
     if (!taskTitle || !description || !date || !time) {
       alert("Please fill in all required fields.");
       return;
     }
 
-    //Create the payload for the API request
+    // Create the payload for the API request
     const newTask = {
       title: taskTitle,
       description,
     };
 
     try {
-      //Send a POST request to the backend API
+      // Send a POST request to the backend API
       const response = await axios.post(
         "https://notes-back-end-78zv.onrender.com/API/notes",
         newTask
@@ -36,7 +37,7 @@ const AddTodoPopup = ({ isOpen, onClose, onCreate }) => {
 
       onCreate(response.data);
 
-      //Close the modal
+      // Close the modal
       onClose();
     } catch (error) {
       console.error("Error creating task:", error);
@@ -112,22 +113,22 @@ const AddTodoPopup = ({ isOpen, onClose, onCreate }) => {
             <button
               className={`flex-1 p-2 rounded-md border ${
                 category === "Personal"
-                  ? "text-center text-blue-600 text-base font-normal font-['Lexend']"
-                  : "bg-white text-neutral-400 font-normal font-['Lexend']"
-              } text-white hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-600`}
+                  ? "text-center text-white text-base font-normal font-['Lexend']"
+                  : "bg-white text-black font-normal font-['Lexend']"
+              } text-center text-base font-normal font-['Lexend'] hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-600 flex items-center justify-center`}
               onClick={() => setCategory("Personal")}
             >
-              Personal
+              <FaUser className="mr-2" /> Personal
             </button>
             <button
               className={`flex-1 p-2 rounded-md border ${
                 category === "Group"
-                  ? "text-center text-blue-600 text-base font-normal font-['Lexend']"
-                  : "bg-white text-neutral-400 font-normal font-['Lexend']"
-              } text-white hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-600`}
+                  ? "text-center text-white text-base font-normal font-['Lexend']"
+                  : "bg-white text-black font-normal font-['Lexend']"
+              } text-center text-base font-normal font-['Lexend'] hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-600 flex items-center justify-center`}
               onClick={() => setCategory("Group")}
             >
-              Group
+              <FaUsers className="mr-2" /> Group
             </button>
           </div>
         </div>
