@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import TodoList from "./TodoList";
+import AddTodoPopup from "./AddTodoPopup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Navbar } from "./Navbar";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -10,7 +14,9 @@ function App() {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await fetch("http://localhost:5000/API/notes");
+        const response = await fetch(
+          "https://notes-back-end-78zv.onrender.com/API/notes"
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -30,12 +36,19 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-custom-outer-container p-8 border-l-4 border-r-4 border-gray-300">
-      <h1>To-Do Liste</h1>
+    <div className="min-h-screen bg-custom-outer-container flex flex-col items-center justify-center">
+      <h1 className="text-3xl font-bold mb-8"></h1>
+      <Navbar />
       <TodoList todos={todos} />
-      <button onClick={() => setIsPopupOpen(true)} className="text-white ">
-        Add new task
-      </button>
+      <div className="flex flex-col items-center justify-center flex-grow">
+        <button
+          onClick={() => setIsPopupOpen(true)}
+          className="bg-custom-inner-container text-white font-bold py-4 px-8 mb-4  rounded-lg shadow-xl hover:bg-custom-outer-container focus:outline-none focus:ring-4 focus:ring-custom-outer-container transition duration-300 flex items-center"
+        >
+          <FontAwesomeIcon icon={faPlus} className="mr-3 text-xl" />
+          Add new Task
+        </button>
+      </div>
       {isPopupOpen && (
         <AddTodoPopup
           addTodo={addTodo}
