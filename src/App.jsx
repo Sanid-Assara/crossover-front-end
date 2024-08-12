@@ -3,6 +3,7 @@ import TodoList from "./TodoList";
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   //Fetch todos from API
 
@@ -24,10 +25,23 @@ function App() {
     fetchTodos();
   }, []);
 
+  const addTodo = (todo) => {
+    setTodos([...todos, todo]);
+  };
+
   return (
     <div className="min-h-screen bg-custom-outer-container p-8 border-l-4 border-r-4 border-gray-300">
       <h1>To-Do Liste</h1>
       <TodoList todos={todos} />
+      <button onClick={() => setIsPopupOpen(true)} className="text-white ">
+        Add new task
+      </button>
+      {isPopupOpen && (
+        <AddTodoPopup
+          addTodo={addTodo}
+          closePopup={() => setIsPopupOpen(false)}
+        />
+      )}
     </div>
   );
 }
