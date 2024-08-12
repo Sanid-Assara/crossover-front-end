@@ -1,8 +1,9 @@
 import { useState } from "react";
 import AddTodoPopup from "./AddTodoPopup";
 import EditTodoPopup from "./EditTodoPopup";
+import axios from "axios";
 
-function TodoList({ todos, onEdit }) {
+function TodoList({ todos, onEdit, onDelete }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -15,6 +16,17 @@ function TodoList({ todos, onEdit }) {
   const handleEditTask = (updatedTodo) => {
     onEdit(updatedTodo);
     setIsEditModalOpen(false);
+  };
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`https://notes-back-end-78zv.onrender.com/API/notes/${id}`)
+      .then(() => {
+        onDelete(id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -50,6 +62,7 @@ function TodoList({ todos, onEdit }) {
             >
               Edit todo
             </button>
+            <button onClick={() => handleDelete(todo.id)}>Delete</button>
           </li>
         ))}
       </ul>
