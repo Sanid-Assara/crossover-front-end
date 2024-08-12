@@ -9,7 +9,9 @@ function App() {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await fetch("https://notes-back-end-78zv.onrender.com/API/notes");
+        const response = await fetch(
+          "https://notes-back-end-78zv.onrender.com/API/notes"
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -45,10 +47,14 @@ function App() {
     }
   };
 
+  const deleteTodo = (id) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <div className="min-h-screen bg-custom-outer-container p-8 border-l-4 border-r-4 border-gray-300">
       <h1>To-Do Liste</h1>
-      <TodoList todos={todos} onEdit={editTodo} />
+      <TodoList todos={todos} onEdit={editTodo} onDelete={deleteTodo} />
     </div>
   );
 }
