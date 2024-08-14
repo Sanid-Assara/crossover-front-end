@@ -8,6 +8,10 @@ import { Navbar } from "./Navbar";
 function App() {
   const [todos, setTodos] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [tasks, setTasks] = useState([]);
+  const [currentTodo, setCurrentTodo] = useState(null);
 
   //Fetch todos from API
 
@@ -75,8 +79,9 @@ function App() {
       </div>
       {isPopupOpen && (
         <AddTodoPopup
-          addTodo={addTodo}
-          closePopup={() => setIsPopupOpen(false)}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onCreate={handleCreateTask}
         />
       )}
     </div>
