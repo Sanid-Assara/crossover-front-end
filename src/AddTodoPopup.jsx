@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import axios from "axios";
 import { FaUser, FaUsers } from "react-icons/fa"; // Importing the icons
@@ -152,7 +151,5 @@ const AddTodoPopup = ({ isOpen, onClose, onCreate }) => {
     </div>
   );
 };
-
-
 
 export default AddTodoPopup;
